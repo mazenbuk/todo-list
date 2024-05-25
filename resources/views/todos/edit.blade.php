@@ -16,6 +16,14 @@
         <textarea class="form-control" name="description" rows="3">{{ $todo->description }}</textarea>
     </div>
     <div class="form-group m-3">
+        <label for="status">Status</label>
+        <select class="form-control" name="status">
+            <option value="todo" {{ $todo->status == 'todo' ? 'selected' : '' }}>Todo</option>
+            <option value="in-progress" {{ $todo->status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
+            <option value="done" {{ $todo->status == 'done' ? 'selected' : '' }}>Done</option>
+        </select>
+    </div>
+    <div class="form-group m-3">
         <input type="submit" class="btn btn-primary float-end" value="Submit">
     </div>
 </form>

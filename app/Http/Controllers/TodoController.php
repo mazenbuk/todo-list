@@ -25,26 +25,28 @@ class TodoController extends Controller
         return view('todos.edit')->with('todo', $todo);
     }    
 
-    public function update(Todo $todo){
+    public function update(Request $request, Todo $todo){
         try {
             $this->validate(request(), [
                 'name' => ['required'],
                 'description' => ['required'],
+                'status' => ['required']
             ]);
         } catch (ValidationException $e) {
             // Handle the validation exception if necessary
         }
-
+    
         $data = request()->all();
-
+    
         $todo->name = $data['name'];
         $todo->description = $data['description'];
+        $todo->status = $data['status'];
         $todo->save();
-
+    
         session()->flash('success', 'Todo updated successfully');
-
+    
         return redirect('/');
-    }
+    }    
 
     public function delete(Todo $todo){
         $todo->delete();
@@ -52,25 +54,28 @@ class TodoController extends Controller
         return redirect('/');
     }    
 
-    public function store(){
+    public function store(Request $request){
         try {
             $this->validate(request(), [
                 'name' => ['required'],
-                'description' => ['required']
+                'description' => ['required'],
+                'status' => ['required']
             ]);
         } catch (ValidationException $e) {
             // Handle the validation exception if necessary
         }
-
+    
         $data = request()->all();
-
+    
         $todo = new Todo();
         $todo->name = $data['name'];
         $todo->description = $data['description'];
+        $todo->status = $data['status'];
         $todo->save();
-
+    
         session()->flash('success', 'Todo created successfully');
-
+    
         return redirect('/');
     }
+    
 }

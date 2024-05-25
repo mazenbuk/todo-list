@@ -17,6 +17,14 @@
         <textarea class="form-control" name="description" rows="3"></textarea>
     </div>
     <div class="form-group m-3">
+        <label for="status">Status</label>
+        <select class="form-control" name="status">
+            <option value="todo">Todo</option>
+            <option value="in-progress">In Progress</option>
+            <option value="done">Done</option>
+        </select>
+    </div>
+    <div class="form-group m-3">
         <input type="submit" class="btn btn-primary float-end" value="Submit">
     </div>
 </form>
