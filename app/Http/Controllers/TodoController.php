@@ -8,12 +8,19 @@ use Illuminate\Validation\ValidationException; // Import the ValidationException
 
 class TodoController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        if ($request->has('clear_completed')) {
+            Todo::where('status', 'done')->delete();
+            session()->flash('success', 'All completed todos cleared');
+            return redirect('/');
+        }
+    
         $todos = Todo::all();
         $completedCount = $todos->where('status', 'done')->count();
     
         return view('index', compact('todos', 'completedCount'));
-    }    
+    }
+    
 
     public function create(){
         return view('todos.create');
@@ -79,5 +86,10 @@ class TodoController extends Controller
     
         return redirect('/');
     }
+
+    public function clearCompleted() {
+        Todo::where('status', 'done')->delete();
+        return response()->json(['status' => 'success']);
+    }    
     
 }

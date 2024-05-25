@@ -46,25 +46,32 @@
     <div class="col-4">
         <h5>Done</h5>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body d-flex justify-content-between align-items-center">
                 @if ($completedCount > 0)
-                    <p>{{ $completedCount }} Completed <a href="#" id="showCompleted">Show</a></p>
+                    <p class="mb-0" id="completedCount">{{ $completedCount }} Completed</p>
+                    <div>
+                        <a href="#" id="showCompleted" class="btn btn-link">Show</a>
+                        <form method="GET" action="{{ url('/') }}" style="display: inline;">
+                            <input type="hidden" name="clear_completed" value="1">
+                            <button type="submit" class="btn btn-danger btn-sm">Clear All</button>
+                        </form>
+                    </div>
                 @else
-                    <p>No tasks completed yet.</p>
+                    <p id="completedCount">No tasks completed yet.</p>
                 @endif
-                <div id="completedTodos" style="display: none;">
-                    @foreach ($todos as $todo)
-                        @if($todo->status == 'done')
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <h6 class="card-title">{{ $todo->name }}</h6>
-                                    <p class="card-text">{{ $todo->description }}</p>
-                                    <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
-                                </div>
+            </div>
+            <div id="completedTodos" style="display: none;">
+                @foreach ($todos as $todo)
+                    @if($todo->status == 'done')
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ $todo->name }}</h6>
+                                <p class="card-text">{{ $todo->description }}</p>
+                                <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
                             </div>
-                        @endif
-                    @endforeach
-                </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
