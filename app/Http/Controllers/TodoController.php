@@ -8,10 +8,12 @@ use Illuminate\Validation\ValidationException; // Import the ValidationException
 
 class TodoController extends Controller
 {
-    public function index(){
+    public function index() {
         $todos = Todo::all();
-        return view('index')->with('todos', $todos);
-    }
+        $completedCount = $todos->where('status', 'done')->count();
+    
+        return view('index', compact('todos', 'completedCount'));
+    }    
 
     public function create(){
         return view('todos.create');

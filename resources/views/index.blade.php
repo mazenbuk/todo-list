@@ -47,20 +47,38 @@
         <h5>Done</h5>
         <div class="card">
             <div class="card-body">
-                @foreach ($todos as $todo)
-                    @if($todo->status == 'done')
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                <h6 class="card-title">{{ $todo->name }}</h6>
-                                <p class="card-text">{{ $todo->description }}</p>
-                                <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
+                @if ($completedCount > 0)
+                    <p>{{ $completedCount }} Completed <a href="#" id="showCompleted">Show</a></p>
+                @else
+                    <p>No tasks completed yet.</p>
+                @endif
+                <div id="completedTodos" style="display: none;">
+                    @foreach ($todos as $todo)
+                        @if($todo->status == 'done')
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ $todo->name }}</h6>
+                                    <p class="card-text">{{ $todo->description }}</p>
+                                    <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                @endforeach
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('showCompleted').addEventListener('click', function() {
+    var completedTodos = document.getElementById('completedTodos');
+    if (completedTodos.style.display === 'none') {
+        completedTodos.style.display = 'block';
+    } else {
+        completedTodos.style.display = 'none';
+    }
+});
+</script>
 
 @endsection
