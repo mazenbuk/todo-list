@@ -20,6 +20,24 @@
         body {
             font-family: 'Nunito';
         }
+        .navbar-nav {
+            flex-direction: row;
+        }
+        .nav-item + .nav-item {
+            margin-left: 1rem;
+        }
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .navbar .container {
+            position: relative;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            color: blue !important;
+        }
     </style>
 </head>
 
@@ -28,7 +46,20 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container">
             <a href="/"><span class="navbar-brand mb-0 h1">Terang Bulan Sumbersari</span></a>
-            <a href="{{ route('todos.create') }}"><span class="btn btn-primary">Create Todo</span></a>
+            <div class="nav-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('todos.work') }}" class="nav-link {{ request()->get('category', 'Work') == 'Work' ? 'active' : '' }}">Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('todos.home') }}" class="nav-link {{ request()->get('category') == 'Home' ? 'active' : '' }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('todos.other') }}" class="nav-link {{ request()->get('category') == 'Other' ? 'active' : '' }}">Other</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="{{ route('todos.create', ['category' => request()->get('category', 'Work')]) }}"><span class="btn btn-primary">Create Todo</span></a>
         </div>
     </nav>
 

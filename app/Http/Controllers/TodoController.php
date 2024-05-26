@@ -9,22 +9,29 @@ use Illuminate\Validation\ValidationException; // Import the ValidationException
 class TodoController extends Controller
 {
     public function index(Request $request) {
-        if ($request->has('clear_completed')) {
-            Todo::where('status', 'done')->delete();
-            session()->flash('success', 'All completed todos cleared');
-            return redirect('/');
-        }
-    
-        $todos = Todo::all();
+        $category = $request->input('category', 'Work');
+        $todos = Todo::where('category', $category)->get();
         $completedCount = $todos->where('status', 'done')->count();
     
-        return view('index', compact('todos', 'completedCount'));
+        return view('index', compact('todos', 'completedCount', 'category'));
     }
     
-
-    public function create(){
-        return view('todos.create');
+    public function work() {
+        return redirect()->route('todos.index', ['category' => 'Work']);
     }
+    
+    public function home() {
+        return redirect()->route('todos.index', ['category' => 'Home']);
+    }
+    
+    public function other() {
+        return redirect()->route('todos.index', ['category' => 'Other']);
+    }    
+
+    public function create(Request $request) {
+        $category = $request->input('category', 'Work');
+        return view('todos.create', compact('category'));
+    }    
 
     public function details(Todo $todo){
         return view('todos.details')->with('todo', $todo);
@@ -63,29 +70,20 @@ class TodoController extends Controller
         return redirect('/');
     }    
 
-    public function store(Request $request){
-        try {
-            $this->validate(request(), [
-                'name' => ['required'],
-                'description' => ['required'],
-                'status' => ['required']
-            ]);
-        } catch (ValidationException $e) {
-            // Handle the validation exception if necessary
-        }
+    public function store(Request $request) {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'status' => 'required|string',
+            'category' => 'required|string'
+        ]);
     
-        $data = request()->all();
-    
-        $todo = new Todo();
-        $todo->name = $data['name'];
-        $todo->description = $data['description'];
-        $todo->status = $data['status'];
-        $todo->save();
+        Todo::create($data);
     
         session()->flash('success', 'Todo created successfully');
-    
-        return redirect('/');
+        return redirect()->route('todos.index', ['category' => $data['category']]);
     }
+    
 
     public function clearCompleted() {
         Todo::where('status', 'done')->delete();
