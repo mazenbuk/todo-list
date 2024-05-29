@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    My Todo App
+    Sumbersari ToDo
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
                     @if($todo->status == 'todo')
                         <div class="card mb-2">
                             <div class="card-body">
-                                <h6 class="card-title">{{ $todo->name }}</h6>
+                                <h5 class="card-title" style="font-weight: bold;">{{ $todo->name }}</h5>
                                 <p class="card-text">{{ $todo->description }}</p>
                                 <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
                             </div>
@@ -33,7 +33,7 @@
                     @if($todo->status == 'in-progress')
                         <div class="card mb-2">
                             <div class="card-body">
-                                <h6 class="card-title">{{ $todo->name }}</h6>
+                                <h5 class="card-title" style="font-weight: bold;">{{ $todo->name }}</h5>
                                 <p class="card-text">{{ $todo->description }}</p>
                                 <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
                             </div>
@@ -65,7 +65,7 @@
                     @if($todo->status == 'done')
                         <div class="card mb-2">
                             <div class="card-body">
-                                <h6 class="card-title">{{ $todo->name }}</h6>
+                                <h5 class="card-title" style="font-weight: bold;">{{ $todo->name }}</h5>
                                 <p class="card-text">{{ $todo->description }}</p>
                                 <a href="{{ route('todos.details', $todo->id) }}" class="btn btn-primary">Details</a>
                             </div>
