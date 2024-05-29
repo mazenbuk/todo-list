@@ -88,6 +88,6 @@ class TodoController extends Controller
     public function clearCompleted() {
         Todo::where('status', 'done')->delete();
         return response()->json(['status' => 'success']);
-    }    
+    }     
     
 }

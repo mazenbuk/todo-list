@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="row mt-3">
-    <div class="col-4">
+    <div class="col-12 col-md-4 mb-3">
         <h5>Todo</h5>
         <div class="card">
             <div class="card-body">
@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-12 col-md-4 mb-3">
         <h5>In Progress</h5>
         <div class="card">
             <div class="card-body">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-12 col-md-4 mb-3">
         <h5>Done</h5>
         <div class="card">
             <div class="card-body d-flex justify-content-between align-items-center">
