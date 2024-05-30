@@ -17,7 +17,9 @@
 
     <style>
         body {
-            font-family: 'Nunito';
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
 
         .nav-center {
@@ -27,11 +29,65 @@
 
         .nav-link.active {
             font-weight: bold;
-            color: blue !important;
+            color: #0d6efd !important;
         }
 
         .navbar-brand {
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #495057;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #0d6efd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0a58ca;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0a58ca;
+            border-color: #0a58ca;
+        }
+
+        .alert-success {
+            background-color: #d1e7dd;
+            border-color: #badbcc;
+            color: #0f5132;
+        }
+
+        .card {
+            border: 2px solid #343a40;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
         }
     </style>
 </head>
@@ -40,7 +96,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a href="/" class="navbar-brand">Terang Bulan Sumbersari</a>
+            <a href="/" class="navbar-brand">
+                <img src="{{ asset('images/logo.png') }}">
+                Terang Bulan Sumbersari
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
